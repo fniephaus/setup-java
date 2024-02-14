@@ -80,6 +80,11 @@ async function run() {
       core.info('about to check cache...')
       await restore(cache, cacheDependencyPath);
     }
+    core.info('setting up why-is-node-running')
+    const log = require('why-is-node-running')
+    setTimeout(function () {
+      log() // logs out active handles that are keeping node running
+    }, 1000)
     core.info('Really done')
   } catch (error) {
     core.setFailed((error as Error).message);
@@ -89,10 +94,7 @@ async function run() {
 run();
 core.info('Done to run')
 
-const log = require('why-is-node-running')
-setTimeout(function () {
-  log() // logs out active handles that are keeping node running
-}, 100)
+
 
 async function installVersion(
   version: string,
