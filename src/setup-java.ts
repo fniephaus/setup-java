@@ -89,6 +89,11 @@ async function run() {
 run();
 core.info('Done to run')
 
+const log = require('why-is-node-running')
+setTimeout(function () {
+  log() // logs out active handles that are keeping node running
+}, 100)
+
 async function installVersion(
   version: string,
   options: installerInputsOptions,
