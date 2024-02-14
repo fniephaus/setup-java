@@ -86,8 +86,6 @@ async function run() {
   }
 }
 
-run();
-
 async function installVersion(
   version: string,
   options: installerInputsOptions,
@@ -144,3 +142,5 @@ interface installerInputsOptions {
   jdkFile: string;
   toolchainIds: Array<string>;
 }
+
+run();
