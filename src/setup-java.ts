@@ -12,6 +12,7 @@ import {restore} from './cache';
 import * as path from 'path';
 import {getJavaDistribution} from './distributions/distribution-factory';
 import {JavaInstallerOptions} from './distributions/base-models';
+import { time } from 'console';
 
 async function run() {
   try {
@@ -82,16 +83,20 @@ async function run() {
     }
     core.info('setting up why-is-node-running')
     const log = require('why-is-node-running')
-    const interval = setInterval(function () {
+    let timeout = setTimeout(function () {
       log() // logs out active handles that are keeping node running
     }, 2 * 1000)
-    setTimeout(function () {
-      clearInterval(interval)
-    }, 60 * 1000)
-    core.info('Really done')
+    
+    let id:number  = timeout[Symbol.toPrimitive]()
+    core.info('Kill all timeouts...')
+    while (id--) {
+        clearTimeout(id);
+    }
+    core.info('Alomst done')
   } catch (error) {
     core.setFailed((error as Error).message);
   }
+  core.info('Really done')
 }
 
 run();
