@@ -82,9 +82,12 @@ async function run() {
     }
     core.info('setting up why-is-node-running')
     const log = require('why-is-node-running')
-    setTimeout(function () {
+    const interval = setInterval(function () {
       log() // logs out active handles that are keeping node running
-    }, 1000)
+    }, 2 * 1000)
+    setTimeout(function () {
+      clearInterval(interval)
+    }, 60 * 1000)
     core.info('Really done')
   } catch (error) {
     core.setFailed((error as Error).message);
