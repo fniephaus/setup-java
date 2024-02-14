@@ -27,7 +27,8 @@ export abstract class JavaBase {
   ) {
     this.http = new httpm.HttpClient('actions/setup-java', undefined, {
       allowRetries: true,
-      maxRetries: 3
+      maxRetries: 3,
+      keepAlive: false,
     });
 
     ({version: this.version, stable: this.stable} = this.normalizeVersion(

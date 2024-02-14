@@ -81,17 +81,6 @@ async function run() {
       core.info('about to check cache...')
       await restore(cache, cacheDependencyPath);
     }
-    core.info('setting up why-is-node-running')
-    const log = require('why-is-node-running')
-    let timeout = setTimeout(function () {
-      log() // logs out active handles that are keeping node running
-    }, 2 * 1000)
-    
-    let id:number  = timeout[Symbol.toPrimitive]()
-    core.info('Kill all timeouts...')
-    while (id--) {
-        clearTimeout(id);
-    }
     core.info('Alomst done')
   } catch (error) {
     core.setFailed((error as Error).message);
