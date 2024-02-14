@@ -40,6 +40,7 @@ export async function configureAuthentication() {
     overwriteSettings,
     gpgPassphrase
   );
+  core.info('createAuthenticationSettings done')
 
   if (gpgPrivateKey) {
     core.info('Importing private gpg key');

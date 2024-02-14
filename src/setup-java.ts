@@ -75,9 +75,12 @@ async function run() {
     core.info(`##[add-matcher]${path.join(matchersPath, 'java.json')}`);
 
     await auth.configureAuthentication();
+    core.info('about to check availability of cache feature...')
     if (cache && isCacheFeatureAvailable()) {
+      core.info('about to check cache...')
       await restore(cache, cacheDependencyPath);
     }
+    core.info('Really done')
   } catch (error) {
     core.setFailed((error as Error).message);
   }
